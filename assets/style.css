@@ -32,7 +32,7 @@ header {
   align-items: center;
 }
 
-#question {
+#questionInfo {
   font-size: 24px;
   color: var(--text-black);
 }
@@ -45,7 +45,8 @@ header {
   cursor: pointer;
 }
 
-#startBtn {
+#startBtn,
+#initial {
   width: 7rem;
   height: 3rem;
   border: none;
@@ -53,7 +54,8 @@ header {
   font-size: 16px;
 }
 
-#startBtn:hover {
+#startBtn:hover,
+#initial {
   cursor: pointer;
   background: var(--btn-hover);
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
@@ -65,10 +67,15 @@ input {
   color: var(--text-white);
 }
 
+label {
+  margin-left: auto;
+  padding: 0rem 4rem 0rem 0rem;
+}
+
 main {
   width: 55rem;
   max-width: 80%;
-  height: 25rem;
+  height: 20rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -81,5 +88,13 @@ main {
   transform: translate(-50%, -50%);
   position: absolute;
   padding: 3rem;
-  gap: 1px;
+  gap: 1.5rem;
+}
+
+#enterInitials {
+  display: none;
+}
+
+#question-answers {
+  display: none;
 }

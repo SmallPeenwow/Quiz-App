@@ -38,3 +38,45 @@ const questions = [
     answer: "1. break",
   },
 ];
+
+const startButton = document.getElementById('startBtn');
+const quizContainer = document.querySelector('.quizInfo'); // Used for questions and quiz start and for all done
+const headerQuestion = document.getElementById('questionInfo');
+const questionAnswersDiv = document.querySelector('#question-answers');
+const answerBtns = document.querySelector('#btnAnswers'); // Btns that come in when start quiz
+
+// Keep track of array number
+let arrayNum = 0;
+
+
+startButton.addEventListener('click', startGame);
+
+// Starting the game
+function startGame() {
+  quizContainer.style.display = "none";
+  startButton.style.display = "none";
+  populateQuiz();
+}
+
+function nextQuestion() {
+
+}
+
+function answerSelected() {
+
+}
+
+// fills the div question-answers with questions
+function populateQuiz() {
+
+  questions.forEach((item) =>{
+    headerQuestion.innerText = item.questionText;
+    let inputElement = document.createElement("input");
+    inputElement.setAttribute("type", item.options);
+    document.body.appendChile(inputElement);
+    // let n = questions.options.item;
+    // let n = item.options[arrayNum]
+    questionAnswersDiv.appendChild(inputElement);
+    arrayNum++;
+  })
+}
