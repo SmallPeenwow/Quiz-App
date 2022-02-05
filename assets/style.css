@@ -1,0 +1,85 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-green: #218380;
+  --text-white: #ffffff;
+  --text-black: #000000;
+  --btn-hover: #2c9995;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Verdana, sans-serif;
+  font-style: normal;
+  color: var(--text-black);
+  font-size: 16px;
+  background: var(--text-white);
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+header {
+  background: var(--bg-green);
+  color: var(--text-white);
+  height: 4rem;
+  display: flex;
+  align-items: center;
+}
+
+#question {
+  font-size: 24px;
+  color: var(--text-black);
+}
+
+#leaderboard {
+  margin: 0 1rem 0 1rem;
+}
+
+#leaderboard:hover {
+  cursor: pointer;
+}
+
+#startBtn {
+  width: 7rem;
+  height: 3rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+#startBtn:hover {
+  cursor: pointer;
+  background: var(--btn-hover);
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+input {
+  background: var(--bg-green);
+  color: var(--text-white);
+}
+
+main {
+  width: 55rem;
+  max-width: 80%;
+  height: 25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--text-white);
+  border-radius: 15px;
+  border: 1px solid rgb(199, 196, 196);
+  box-shadow: 10px 10px 5px rgb(199, 196, 196);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  padding: 3rem;
+  gap: 1px;
+}
