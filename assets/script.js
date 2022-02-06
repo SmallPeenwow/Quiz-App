@@ -43,13 +43,12 @@ const startButton = document.getElementById('startBtn');
 const quizContainer = document.querySelector('.quizInfo'); // Used for questions and quiz start and for all done
 const headerQuestion = document.getElementById('questionInfo');
 const questionAnswersDiv = document.querySelector('#question-answers');
-const answerBtns = document.querySelector('#btnAnswers'); // Btns that come in when start quiz
 
 // Keep track of array number
 let arrayNum = 0;
 
+startButton.addEventListener('click', startGame); // start quiz btn
 
-startButton.addEventListener('click', startGame);
 
 // Starting the game
 function startGame() {
@@ -59,24 +58,38 @@ function startGame() {
 }
 
 function nextQuestion() {
-
+  questionAnswersDiv.style.display = "none";
+  arrayNum++;
+  populateQuiz();
 }
 
 function answerSelected() {
-
+  deleteChild();
 }
 
 // fills the div question-answers with questions
 function populateQuiz() {
+  headerQuestion.innerText = questions[arrayNum].questionText; 
 
-  questions.forEach((item) =>{
-    headerQuestion.innerText = item.questionText;
-    let inputElement = document.createElement("input");
-    inputElement.setAttribute("type", item.options);
-    document.body.appendChile(inputElement);
-    // let n = questions.options.item;
-    // let n = item.options[arrayNum]
+  const option = questions[arrayNum].options;
+
+  option.forEach(item => {
+    let inputElement = document.createElement('input');
+    inputElement.setAttribute('type', 'submit');
+    inputElement.setAttribute('value', item);
+    inputElement.setAttribute('id', "btnAnswers");
     questionAnswersDiv.appendChild(inputElement);
-    arrayNum++;
-  })
+    
+    const answerBtns = document.querySelector('#btnAnswers'); // Btns that come in when start quiz
+    answerBtns.addEventListener('click', answerSelected); 
+  });
+
+  questionAnswersDiv.style.display = "grid";
+}
+
+// Removes the created btns in div question-answers
+function deleteChild() {
+  while (questionAnswersDiv.firstChild) {
+    questionAnswersDiv.removeChild(questionAnswersDiv.firstChild);
+  }
 }
