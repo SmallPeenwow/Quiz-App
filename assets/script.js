@@ -63,8 +63,27 @@ function nextQuestion() {
   populateQuiz();
 }
 
+// This function is used to compare value of button to the array for correct answer
 function answerSelected() {
-  deleteChild();
+  let lineBreak = document.createElement('hr');
+  let correctOrIncorrect = document.createElement('label'); // creats message to display correct or incorrect
+  correctOrIncorrect.setAttribute('id', 'messageText');
+
+  if(this.id === questions[arrayNum].answer) { // must still add minus time and points system
+    questionAnswersDiv.appendChild(lineBreak);
+    correctOrIncorrect.textContent = 'Correct!';
+    questionAnswersDiv.appendChild(correctOrIncorrect);
+  } else {
+    questionAnswersDiv.appendChild(lineBreak);
+    correctOrIncorrect.textContent = 'Incorrect!';
+    questionAnswersDiv.appendChild(correctOrIncorrect);
+  }
+
+  setTimeout(function() {
+    deleteChild();
+
+  }, 1000);
+
 }
 
 // fills the div question-answers with questions
@@ -77,11 +96,10 @@ function populateQuiz() {
     let inputElement = document.createElement('input');
     inputElement.setAttribute('type', 'submit');
     inputElement.setAttribute('value', item);
-    inputElement.setAttribute('id', "btnAnswers");
+    inputElement.setAttribute('class', "btnAnswers");
+    inputElement.setAttribute('id', item);
+    inputElement.addEventListener('click', answerSelected, false); 
     questionAnswersDiv.appendChild(inputElement);
-    
-    const answerBtns = document.querySelector('#btnAnswers'); // Btns that come in when start quiz
-    answerBtns.addEventListener('click', answerSelected); 
   });
 
   questionAnswersDiv.style.display = "grid";

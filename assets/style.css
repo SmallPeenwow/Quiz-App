@@ -11,11 +11,14 @@
   --btn-hover: #2c9995;
 }
 
+html {
+  font-family: Verdana, sans-serif;
+  font-style: normal;
+}
+
 body {
   margin: 0;
   padding: 0;
-  font-family: Verdana, sans-serif;
-  font-style: normal;
   color: var(--text-black);
   font-size: 16px;
   background: var(--text-white);
@@ -56,7 +59,7 @@ header {
 
 #startBtn:hover,
 #initial:hover,
-#btnAnswers:hover {
+.btnAnswers:hover {
   cursor: pointer;
   background: var(--btn-hover);
   box-shadow: inset 0 0 20px rgb(255 255 255 / 50%),
@@ -105,9 +108,18 @@ main {
   gap: 0.5rem;
 }
 
-#btnAnswers {
+.btnAnswers {
   height: 3rem;
   border: none;
   border-radius: 10px;
   font-size: 16px;
+  text-align: left;
+}
+
+hr {
+  width: 100%;
+}
+
+#messageText {
+  margin-right: 100%;
 }
