@@ -49,7 +49,7 @@ header {
 }
 
 #startBtn,
-#initial {
+#endSubmit {
   width: 7rem;
   height: 3rem;
   border: none;
@@ -58,8 +58,8 @@ header {
 }
 
 #startBtn:hover,
-#initial:hover,
-.btnAnswers:hover {
+.btnAnswers:hover,
+#endSubmit:hover {
   cursor: pointer;
   background: var(--btn-hover);
   box-shadow: inset 0 0 20px rgb(255 255 255 / 50%),
@@ -82,7 +82,6 @@ label {
 main {
   width: 55rem;
   max-width: 80%;
-  /* height: 20rem; */
   min-height: 20rem;
   display: flex;
   flex-direction: column;
@@ -101,6 +100,17 @@ main {
 
 #enterInitials {
   display: none;
+  grid-template-columns: 7.5rem 7.5rem;
+  align-items: center;
+}
+
+#enterInitials label {
+  margin: 0;
+  padding: 0;
+}
+
+#score {
+  grid-column: 1 / 4;
 }
 
 #question-answers {
@@ -122,4 +132,15 @@ hr {
 
 #messageText {
   margin-right: 100%;
+}
+
+#initial {
+  border: 1px solid #c2bbbb;
+  background: var(--text-white);
+  color: var(--text-black);
+  font-size: inherit;
+  font-family: inherit;
+  width: 7rem;
+  border-radius: 3px;
+  height: 2.5rem;
 }
