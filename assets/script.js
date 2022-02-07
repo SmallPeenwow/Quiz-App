@@ -45,9 +45,14 @@ const headerQuestion = document.getElementById('questionInfo');
 const questionAnswersDiv = document.querySelector('#question-answers');
 const enterInitialsDiv = document.querySelector('#enterInitials');
 const doneSubmit = document.querySelector('#endSubmit');
+const timeWatch = document.querySelector('.timer');
+const saveScore = document.querySelector('#saveScore');
 
 // Keep track of array number
 let arrayNum = 0;
+
+let timeSecond = 50; // For timer that will show how long they have to answer the quiz
+let answerWrong = false;
 
 let pointsScore = 0; // Points total at the end 
 
@@ -58,6 +63,7 @@ doneSubmit.addEventListener('click', restartGame);
 function startGame() {
   quizContainer.style.display = "none";
   populateQuiz();
+  showTimeControl(timeSecond, answerWrong);
 }
 
 function nextQuestion() {
@@ -93,7 +99,6 @@ function answerSelected() {
     deleteChild();
     nextQuestion();
   }, 1000);
-
 }
 
 // fills the div question-answers with questions
@@ -152,4 +157,45 @@ function restartGame() {
   } else {
     alert("Enter only 2 initials that are uppercase");
   }
+}
+
+// Controls the time of how long you need to do the quiz question
+function showTimeControl(second, wrong) {
+  displayTime(second);
+
+  countDown = setInterval(() => {
+    second--;
+      displayTime(second);
+      if (second == 0 || second < 1){
+        timeWatch.innerText = 'Time: ';
+        clearInterval(countDown);
+        deleteChild();
+        allDone();
+        saveScore.style.display = 'none';
+      }
+  }, 1000);
+  
+  function displayTime(seconds) {
+    const sec = Math.floor(seconds % 60);
+    timeWatch.innerText = `Time: ${sec}`;
+    timeWatch.setAttribute('value', sec);
+    timeSecond = sec;
+  }
+
+  if(wrong){
+    clearInterval(countDown);
+    timeSecond -= 10;
+    timeWatch.innerText = `Time: ${timeSecond}`;
+    answerWrong = false;
+  }
+}
+
+// Function to show the highscore in the game
+function showScoreBoard() {
+  deleteChild();
+  saveScore.style.display = 'grid';
+  headerQuestion.innerText = 'Highscores';
+  quizContainer.style.display = 'none';
+  enterInitialsDiv.style.display = 'none';
+  document.querySelector('main').style.width = '25rem';
 }

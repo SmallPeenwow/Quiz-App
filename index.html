@@ -12,9 +12,9 @@
 
 <body>
     <header>
-        <a id=leaderboard>View Highscores <i class="fas fa-hand-point-left fa-lg"></i>
+        <a id=leaderboard onclick="showScoreBoard()">View Highscores <i class="fas fa-hand-point-left fa-lg"></i>
         </i></a> 
-        <label>Time: </label>
+        <label class="timer">Time: </label>
     </header>
     <main>
         <h1 id="questionInfo">Coding Quiz Challenge</h1>
@@ -30,7 +30,13 @@
             <input type="text" id="initial" name="initial" value="" autocomplete="off">
             <input type="submit" id="endSubmit" value="Submit">
         </div>
-        <div id="saveScore"></div>
+        <div id="saveScore">
+            <ol id="highscore">
+                <li>CF - 19</li>
+            </ol>
+            <input type="submit" id="goBack" value="Go Back">
+            <input type="submit" id="clearHighscore" value="Clear Highscores">
+        </div>
     </main>
     <script src="assets/script.js"></script>
 </body>
