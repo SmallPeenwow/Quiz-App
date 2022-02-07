@@ -38,6 +38,7 @@ header {
 #questionInfo {
   font-size: 24px;
   color: var(--text-black);
+  margin: 0rem 0rem 0rem 0rem;
 }
 
 #leaderboard {
@@ -111,6 +112,7 @@ main {
 
 #score {
   grid-column: 1 / 4;
+  margin: 0rem 0rem 1.5rem 0rem;
 }
 
 #question-answers {
@@ -143,4 +145,7 @@ hr {
   width: 7rem;
   border-radius: 3px;
   height: 2.5rem;
+}
+
+#saveScore {
 }

@@ -20,16 +20,17 @@
         <h1 id="questionInfo">Coding Quiz Challenge</h1>
         <div class="quizInfo">
             Try to answer to following code-related questions within the time limit.<br></br>
-            Keep in mind that incorrect answers will penailze your score/time by ten seconds!
+            Keep in mind that incorrect answers will penailze your score/time by ten seconds!<br></br>
+            <input id="startBtn" type="submit" value="Start Quiz">
         </div>
         <div id="question-answers"></div>
         <div id="enterInitials">
-            <p id="score"></p>
+            <p id="score" value="0"></p>
             <label for="initial">Enter initials:</label>
-            <input type="text" id="initial" name="initial" maxlength="2">
+            <input type="text" id="initial" name="initial" value="" autocomplete="off">
             <input type="submit" id="endSubmit" value="Submit">
         </div>
-        <input id="startBtn" type="submit" value="Start Quiz">
+        <div id="saveScore"></div>
     </main>
     <script src="assets/script.js"></script>
 </body>

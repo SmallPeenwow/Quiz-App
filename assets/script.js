@@ -52,12 +52,11 @@ let arrayNum = 0;
 let pointsScore = 0; // Points total at the end 
 
 startButton.addEventListener('click', startGame); // start quiz btn
-doneSubmit.addEventListner('click', restartGame);
+doneSubmit.addEventListener('click', restartGame);
 
 // Starting the game
 function startGame() {
   quizContainer.style.display = "none";
-  startButton.style.display = "none";
   populateQuiz();
 }
 
@@ -79,11 +78,11 @@ function answerSelected() {
   let correctOrIncorrect = document.createElement('label'); // creats message to display correct or incorrect
   correctOrIncorrect.setAttribute('id', 'messageText');
 
-  if(this.id === questions[arrayNum].answer) { // must still add minus time and points system
+  if(this.id === questions[arrayNum].answer) { 
     pointsScore += 5;
     correctOrIncorrect.textContent = 'Correct!';
   } else {
-    pointsScore < 0 ? pointsScore = 0 : pointsScore -= 1;
+    pointsScore -= 1;
     correctOrIncorrect.textContent = 'Incorrect!';   
   }
 
@@ -116,14 +115,6 @@ function populateQuiz() {
   questionAnswersDiv.style.display = "grid";
 }
 
-// Remove event listeners
-// function removeEvent() {
-//   debugger;
-//   for (let i = 0; i > questionAnswersDiv.length; i++){
-//     let answerBtn = querySelector('id').removeEventListener('click', answerSelected)
-//   }
-// }
-
 // Removes the created btns in div question-answers
 function deleteChild() {
   while (questionAnswersDiv.firstChild) {
@@ -134,18 +125,31 @@ function deleteChild() {
 
 // This is the function that will show the finally score and enter in initials
 function allDone() {
-  document.querySelector('main').style.width = 'auto';
+  let finalScore =  pointsScore < 0 ? pointsScore = 0 : pointsScore;
+  document.querySelector('main').style.width = '35rem';
   headerQuestion.innerText = 'All done!';
   let scoreShow = document.querySelector('#score');
-  scoreShow.innerText = `Your final score is ${pointsScore}.`;
+  scoreShow.setAttribute('value', finalScore);
+  scoreShow.innerText = `Your final score is ${finalScore}.`;
   enterInitialsDiv.style.display = 'grid';
 }
 
 // start from beginning
 function restartGame() {
-  arrayNum = 0;
-  pointsScore = 0;
-  document.querySelector('#score').innerText = '';
-  enterInitialsDiv.style.display = 'none';
-  document.querySelector('main').style.width = '55rem';
+  let regexMath = /[A-Z]{2}/;
+
+  let userInitials = document.querySelector('#initial').value; // Gest the users input from enter their initials input
+
+  if(regexMath.test(userInitials)){
+    arrayNum = 0;
+    pointsScore = 0;
+    document.querySelector('#score').innerText = '';
+    document.querySelector('#score').removeAttribute('value');
+    enterInitialsDiv.style.display = 'none';
+    document.querySelector('#initial').value = '';
+    document.querySelector('main').style.width = '55rem';
+    quizContainer.style.display = '';
+  } else {
+    alert("Enter only 2 initials that are uppercase");
+  }
 }
