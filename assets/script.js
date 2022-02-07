@@ -192,10 +192,10 @@ function showTimeControl(second, wrong) {
 
 // Function to show the highscore in the game
 function showScoreBoard() {
-  deleteChild();
-  saveScore.style.display = 'grid';
-  headerQuestion.innerText = 'Highscores';
+  headerQuestion.style.display = 'none';
+  questionAnswersDiv.style.display = 'none';
   quizContainer.style.display = 'none';
   enterInitialsDiv.style.display = 'none';
+  saveScore.style.display = 'grid';
   document.querySelector('main').style.width = '25rem';
 }
