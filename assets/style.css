@@ -170,4 +170,11 @@ hr {
   display: none;
   grid-template-columns: 7.5rem 10rem;
   align-items: center;
+  grid-template-rows: 4rem 2rem 4.5rem;
+}
+
+#highScoreText {
+  font-size: 24px;
+  color: var(--text-black);
+  margin: 0rem 0rem 0rem 0rem;
 }

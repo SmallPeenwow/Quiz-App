@@ -45,8 +45,11 @@ const headerQuestion = document.getElementById('questionInfo');
 const questionAnswersDiv = document.querySelector('#question-answers');
 const enterInitialsDiv = document.querySelector('#enterInitials');
 const doneSubmit = document.querySelector('#endSubmit');
-const timeWatch = document.querySelector('.timer');
+const timeWatch = document.querySelector('#timer');
 const saveScore = document.querySelector('#saveScore');
+const goBack = document.querySelector('#goBack'); // The go back btn on highscore
+const clearHighscore = document.querySelector('#clearHighscore'); // Clears all the scores
+const highscoreList = document.querySelector('#highscore');
 
 // Keep track of array number
 let arrayNum = 0;
@@ -58,6 +61,8 @@ let pointsScore = 0; // Points total at the end
 
 startButton.addEventListener('click', startGame); // start quiz btn
 doneSubmit.addEventListener('click', restartGame);
+goBack.addEventListener('click', goBackBtn);
+clearHighscore.addEventListener('click', scoreClear);
 
 // Starting the game
 function startGame() {
@@ -89,6 +94,8 @@ function answerSelected() {
     correctOrIncorrect.textContent = 'Correct!';
   } else {
     pointsScore -= 1;
+   
+    
     correctOrIncorrect.textContent = 'Incorrect!';   
   }
 
@@ -161,9 +168,19 @@ function restartGame() {
 
 // Controls the time of how long you need to do the quiz question
 function showTimeControl(second, wrong) {
-  displayTime(second);
+  // displayTime(second);
 
-  countDown = setInterval(() => {
+  const countDown = setInterval(() => {
+    // let headerTag = document.querySelector('header');
+    // headerTag.removeChild(headerTag.lastChild);
+
+    // let inputLabel = document.createElement('label');
+    // inputLabel.setAttribute('id', 'timer');
+
+    // headerTag.appendChild(inputLabel);
+
+    // wrong === true ? second -= 10 : second--;
+
     second--;
       displayTime(second);
       if (second == 0 || second < 1){
@@ -172,30 +189,44 @@ function showTimeControl(second, wrong) {
         deleteChild();
         allDone();
         saveScore.style.display = 'none';
-      }
+      }    
   }, 1000);
   
   function displayTime(seconds) {
     const sec = Math.floor(seconds % 60);
     timeWatch.innerText = `Time: ${sec}`;
-    timeWatch.setAttribute('value', sec);
+    //timeWatch.setAttribute('value', sec);
     timeSecond = sec;
-  }
-
-  if(wrong){
-    clearInterval(countDown);
-    timeSecond -= 10;
-    timeWatch.innerText = `Time: ${timeSecond}`;
-    answerWrong = false;
   }
 }
 
 // Function to show the highscore in the game
 function showScoreBoard() {
-  headerQuestion.style.display = 'none';
-  questionAnswersDiv.style.display = 'none';
-  quizContainer.style.display = 'none';
-  enterInitialsDiv.style.display = 'none';
-  saveScore.style.display = 'grid';
-  document.querySelector('main').style.width = '25rem';
+  if(quizContainer.style.display === 'none'){
+    alert('Can only see Highscore when on Coding Quiz Challenge');
+  } else {
+    headerQuestion.style.display = 'none';
+    questionAnswersDiv.style.display = 'none';
+    quizContainer.style.display = 'none';
+    enterInitialsDiv.style.display = 'none';
+    saveScore.style.display = 'grid';
+    document.querySelector('main').style.width = '25rem';
+  }
+}
+
+function goBackBtn() {
+  saveScore.style.display = 'none';
+  document.querySelector('main').style.width = '55rem';
+  quizContainer.style.display = '';
+  headerQuestion.style.display = '';
+}
+
+function scoreClear() {
+  if(highscoreList.hasChildNodes()){
+    while(highscoreList.hasChildNodes()){
+      highscoreList.removeChild(highscoreList.firstChild);
+    }
+  } else {
+    alert('There are no scores to clear.');
+  }
 }
