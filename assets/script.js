@@ -39,6 +39,8 @@ const questions = [
   },
 ];
 
+const scoreNumbers = [];
+
 const startButton = document.getElementById('startBtn');
 const quizContainer = document.querySelector('.quizInfo'); // Used for questions and quiz start and for all done
 const headerQuestion = document.getElementById('questionInfo');
@@ -51,11 +53,9 @@ const goBack = document.querySelector('#goBack'); // The go back btn on highscor
 const clearHighscore = document.querySelector('#clearHighscore'); // Clears all the scores
 const highscoreList = document.querySelector('#highscore');
 
-// Keep track of array number
-let arrayNum = 0;
+let arrayNum = 0; // Keep track of array number
 
 let timeSecond = 50; // For timer that will show how long they have to answer the quiz
-let answerWrong = false;
 
 let pointsScore = 0; // Points total at the end 
 
@@ -68,12 +68,12 @@ clearHighscore.addEventListener('click', scoreClear);
 function startGame() {
   quizContainer.style.display = "none";
   populateQuiz();
-  showTimeControl(timeSecond, answerWrong);
+  showTimeControl();
 }
 
 function nextQuestion() {
   arrayNum++;
-
+ 
   if(arrayNum === questions.length){
     questionAnswersDiv.style.display = "none";
     allDone();
@@ -94,13 +94,12 @@ function answerSelected() {
     correctOrIncorrect.textContent = 'Correct!';
   } else {
     pointsScore -= 1;
-   
-    
+    timeSecond -= 10;
     correctOrIncorrect.textContent = 'Incorrect!';   
   }
 
   questionAnswersDiv.appendChild(lineBreak);
-  questionAnswersDiv.appendChild(correctOrIncorrect);
+  questionAnswersDiv.appendChild(correctOrIncorrect); 
 
   setTimeout(function() {
     deleteChild();
@@ -153,6 +152,11 @@ function restartGame() {
   let userInitials = document.querySelector('#initial').value; // Gest the users input from enter their initials input
 
   if(regexMath.test(userInitials)){
+    scoreNumbers;
+    // let playerScore = document.createElement('li');
+    // playerScore.innerText = `${userInitials} - ${pointsScore}`;
+    // highscoreList.appendChild(playerScore);
+
     arrayNum = 0;
     pointsScore = 0;
     document.querySelector('#score').innerText = '';
@@ -167,36 +171,26 @@ function restartGame() {
 }
 
 // Controls the time of how long you need to do the quiz question
-function showTimeControl(second, wrong) {
-  // displayTime(second);
+function showTimeControl() {
+  displayTime(timeSecond);
 
   const countDown = setInterval(() => {
-    // let headerTag = document.querySelector('header');
-    // headerTag.removeChild(headerTag.lastChild);
-
-    // let inputLabel = document.createElement('label');
-    // inputLabel.setAttribute('id', 'timer');
-
-    // headerTag.appendChild(inputLabel);
-
-    // wrong === true ? second -= 10 : second--;
-
-    second--;
-      displayTime(second);
-      if (second == 0 || second < 1){
-        timeWatch.innerText = 'Time: ';
-        clearInterval(countDown);
-        deleteChild();
-        allDone();
-        saveScore.style.display = 'none';
-      }    
+    timeSecond--
+        displayTime(timeSecond);
+        if (timeSecond == 0 || timeSecond < 1){
+          timeWatch.innerText = 'Time: ';
+          clearInterval(countDown);
+          deleteChild();
+          allDone();
+        } else if (arrayNum === questions.length){
+          timeWatch.innerText = 'Time: ';
+          clearInterval(countDown);
+        } 
   }, 1000);
   
   function displayTime(seconds) {
     const sec = Math.floor(seconds % 60);
     timeWatch.innerText = `Time: ${sec}`;
-    //timeWatch.setAttribute('value', sec);
-    timeSecond = sec;
   }
 }
 
@@ -206,9 +200,7 @@ function showScoreBoard() {
     alert('Can only see Highscore when on Coding Quiz Challenge');
   } else {
     headerQuestion.style.display = 'none';
-    questionAnswersDiv.style.display = 'none';
     quizContainer.style.display = 'none';
-    enterInitialsDiv.style.display = 'none';
     saveScore.style.display = 'grid';
     document.querySelector('main').style.width = '25rem';
   }
