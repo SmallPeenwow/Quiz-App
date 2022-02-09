@@ -86,6 +86,13 @@ function nextQuestion() {
 // This function is used to compare value of button to the array for correct answer
 function answerSelected() {
 
+  // Removes the EventListener from the input tags
+  let answerButtons = questionAnswersDiv.getElementsByTagName('input');
+
+  for(let i = 0; i < answerButtons.length; i++){
+    answerButtons[i].removeEventListener('click', answerSelected);
+  }
+
   let lineBreak = document.createElement('hr');
   let correctOrIncorrect = document.createElement('label'); // creats message to display correct or incorrect
   correctOrIncorrect.setAttribute('id', 'messageText');
