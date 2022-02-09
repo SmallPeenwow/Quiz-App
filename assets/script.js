@@ -39,7 +39,7 @@ const questions = [
   },
 ];
 
-const scoreNumbers = [];
+const scoreNumbers = [] // Will be used to store user Initials and user scores;
 
 const startButton = document.getElementById('startBtn');
 const quizContainer = document.querySelector('.quizInfo'); // Used for questions and quiz start and for all done
@@ -68,6 +68,7 @@ clearHighscore.addEventListener('click', scoreClear);
 function startGame() {
   quizContainer.style.display = "none";
   populateQuiz();
+  timeSecond = 50;
   showTimeControl();
 }
 
@@ -143,6 +144,7 @@ function allDone() {
   scoreShow.setAttribute('value', finalScore);
   scoreShow.innerText = `Your final score is ${finalScore}.`;
   enterInitialsDiv.style.display = 'grid';
+  timeSecond = 0;
 }
 
 // start from beginning
@@ -152,13 +154,16 @@ function restartGame() {
   let userInitials = document.querySelector('#initial').value; // Gest the users input from enter their initials input
 
   if(regexMath.test(userInitials)){
-    scoreNumbers;
-    // let playerScore = document.createElement('li');
-    // playerScore.innerText = `${userInitials} - ${pointsScore}`;
-    // highscoreList.appendChild(playerScore);
+
+    const objectInsert = [] // well be inserted into scoreNumbers array
+    objectInsert[0] = pointsScore;
+    objectInsert[1] = userInitials;
+
+    scoreNumbers.push(objectInsert);
 
     arrayNum = 0;
     pointsScore = 0;
+
     document.querySelector('#score').innerText = '';
     document.querySelector('#score').removeAttribute('value');
     enterInitialsDiv.style.display = 'none';
@@ -196,11 +201,23 @@ function showTimeControl() {
 
 // Function to show the highscore in the game
 function showScoreBoard() {
-  if(quizContainer.style.display === 'none'){
+  if (saveScore.style.display === 'grid'){
+    goBackBtn();
+  } else if(quizContainer.style.display === 'none'){
     alert('Can only see Highscore when on Coding Quiz Challenge');
   } else {
     headerQuestion.style.display = 'none';
     quizContainer.style.display = 'none';
+
+    // Used to sort the scoreNumbers array into the highest value to lowest
+    scoreNumbers.sort((valueOne, valueTwo) => valueTwo[0] - valueOne[0]); 
+
+    for(let i = 0; i < scoreNumbers.length; i++){
+      let playerScore = document.createElement('li');
+      playerScore.innerText = `${scoreNumbers[i][1]} - ${scoreNumbers[i][0]}`;
+      highscoreList.appendChild(playerScore);
+    }
+
     saveScore.style.display = 'grid';
     document.querySelector('main').style.width = '25rem';
   }
@@ -211,14 +228,21 @@ function goBackBtn() {
   document.querySelector('main').style.width = '55rem';
   quizContainer.style.display = '';
   headerQuestion.style.display = '';
+  clearListItems();
 }
 
 function scoreClear() {
   if(highscoreList.hasChildNodes()){
-    while(highscoreList.hasChildNodes()){
-      highscoreList.removeChild(highscoreList.firstChild);
-    }
+    clearListItems();
+    scoreNumbers.length = 0; // Removes all the items from the array
   } else {
     alert('There are no scores to clear.');
+  }
+}
+
+// Clears the li tags in the ol tags
+function clearListItems() {
+  while(highscoreList.hasChildNodes()){
+    highscoreList.removeChild(highscoreList.firstChild);
   }
 }

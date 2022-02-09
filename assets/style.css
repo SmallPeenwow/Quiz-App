@@ -170,7 +170,7 @@ hr {
   display: none;
   grid-template-columns: 7.5rem 10rem;
   align-items: center;
-  grid-template-rows: 4rem 2rem 4.5rem;
+  grid-template-rows: 4rem 4rem 4.5rem;
 }
 
 #highScoreText {
