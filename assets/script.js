@@ -156,7 +156,7 @@ function allDone() {
 
 // start from beginning
 function restartGame() {
-  let regexMath = /[A-Z]{2}/;
+  let regexMath = /^[A-Z]{2}$/;
 
   let userInitials = document.querySelector('#initial').value; // Gest the users input from enter their initials input
 
