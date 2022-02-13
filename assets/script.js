@@ -177,6 +177,7 @@ function restartGame() {
     document.querySelector('#initial').value = '';
     document.querySelector('main').style.width = '55rem';
     quizContainer.style.display = '';
+    headerQuestion.innerText = "Coding Quiz Challenge";
   } else {
     alert("Enter only 2 initials that are uppercase");
   }
